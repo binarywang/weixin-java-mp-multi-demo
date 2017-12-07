@@ -1,26 +1,35 @@
 package com.github.binarywang.demo.spring.service;
 
+import com.github.binarywang.demo.spring.config.WxConfig;
+import com.github.binarywang.demo.spring.config.WxGzh1Config;
+import com.github.binarywang.demo.spring.handler.*;
+import com.github.binarywang.demo.spring.handler.gzh1.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.binarywang.demo.spring.config.WxGzh1Config;
-import com.github.binarywang.demo.spring.config.WxConfig;
-import com.github.binarywang.demo.spring.handler.AbstractHandler;
-import com.github.binarywang.demo.spring.handler.MenuHandler;
-import com.github.binarywang.demo.spring.handler.MsgHandler;
-import com.github.binarywang.demo.spring.handler.SubscribeHandler;
-import com.github.binarywang.demo.spring.handler.UnsubscribeHandler;
-
 /**
- * 
  * @author Binary Wang
- *
  */
 @Service
 public class Gzh1WxService extends BaseWxService {
   @Autowired
-  private  WxGzh1Config wxConfig;
-  
+  private WxGzh1Config wxConfig;
+
+  @Autowired
+  private Gzh1LocationHandler locationHandler;
+
+  @Autowired
+  private Gzh1MenuHandler menuHandler;
+
+  @Autowired
+  private Gzh1MsgHandler msgHandler;
+
+  @Autowired
+  private Gzh1UnSubscribeHandler unSubscribeHandler;
+
+  @Autowired
+  private Gzh1SubscribeHandler subscribeHandler;
+
   @Override
   protected WxConfig getServerConfig() {
     return this.wxConfig;
@@ -28,37 +37,31 @@ public class Gzh1WxService extends BaseWxService {
 
   @Override
   protected MenuHandler getMenuHandler() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.menuHandler;
   }
 
   @Override
   protected SubscribeHandler getSubscribeHandler() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.subscribeHandler;
   }
 
   @Override
   protected UnsubscribeHandler getUnsubscribeHandler() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.unSubscribeHandler;
   }
 
   @Override
   protected AbstractHandler getLocationHandler() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.locationHandler;
   }
 
   @Override
   protected MsgHandler getMsgHandler() {
-    // TODO Auto-generated method stub
-    return null;
+    return this.msgHandler;
   }
 
   @Override
   protected AbstractHandler getScanHandler() {
-    // TODO Auto-generated method stub
     return null;
   }
 

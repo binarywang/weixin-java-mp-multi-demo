@@ -1,20 +1,13 @@
 package com.github.binarywang.demo.spring.service;
 
+import com.github.binarywang.demo.spring.config.WxConfig;
+import com.github.binarywang.demo.spring.config.WxGzh2Config;
+import com.github.binarywang.demo.spring.handler.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.binarywang.demo.spring.config.WxGzh2Config;
-import com.github.binarywang.demo.spring.config.WxConfig;
-import com.github.binarywang.demo.spring.handler.AbstractHandler;
-import com.github.binarywang.demo.spring.handler.MenuHandler;
-import com.github.binarywang.demo.spring.handler.MsgHandler;
-import com.github.binarywang.demo.spring.handler.SubscribeHandler;
-import com.github.binarywang.demo.spring.handler.UnsubscribeHandler;
-
 /**
- * 
  * @author Binary Wang
- *
  */
 @Service
 public class Gzh2WxService extends BaseWxService {

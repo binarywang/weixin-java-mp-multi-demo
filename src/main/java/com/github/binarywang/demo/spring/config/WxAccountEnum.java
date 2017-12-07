@@ -2,40 +2,40 @@ package com.github.binarywang.demo.spring.config;
 
 /**
  * 公众号标识的枚举类
- * @author Binary Wang
  *
+ * @author Binary Wang
  */
 public enum WxAccountEnum {
-    GZH1(1, "公众号1"),
-    GZH2(2, "公众号2");
+  GZH1(1, "公众号1"),
+  GZH2(2, "公众号2");
 
-    private int pubid;
-    private String name;
+  private int pubid;
+  private String name;
 
-    private WxAccountEnum(int pubid, String name) {
-        this.name = name;
-        this.pubid = pubid;
+  private WxAccountEnum(int pubid, String name) {
+    this.name = name;
+    this.pubid = pubid;
+  }
+
+  public static int queryPubid(String wxCode) {
+    return WxAccountEnum.valueOf(wxCode.toUpperCase()).getPubid();
+  }
+
+  public static String queryWxCode(int pubid) {
+    for (WxAccountEnum e : values()) {
+      if (e.getPubid() == pubid) {
+        return e.name().toLowerCase();
+      }
     }
 
-    public int getPubid() {
-        return this.pubid;
-    }
+    return null;
+  }
 
-    public String getName() {
-        return this.name;
-    }
+  public int getPubid() {
+    return this.pubid;
+  }
 
-    public static int queryPubid(String wxCode) {
-        return WxAccountEnum.valueOf(wxCode.toUpperCase()).getPubid();
-    }
-
-    public static String queryWxCode(int pubid) {
-        for (WxAccountEnum e : values()) {
-            if (e.getPubid() == pubid) {
-                return e.name().toLowerCase();
-            }
-        }
-
-        return null;
-    }
+  public String getName() {
+    return this.name;
+  }
 }

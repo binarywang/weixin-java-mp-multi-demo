@@ -14,67 +14,65 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
- * 
  * @author Binary Wang
- *
  */
 @Aspect
 @Component
 public class ControllerLogAspect {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("within(com.github.binarywang.demo.spring..*.controller..*)")
-    public void inController() {
+  private static String getLoginUserName() {
+    Authentication authentication = SecurityContextHolder.getContext()
+        .getAuthentication();
+    if (authentication != null) {
+      return authentication.getName();
     }
 
-    @Pointcut("execution(public * com.github.binarywang.demo.spring..*.controller..*.*(..))")
-    public void controller() {
-    }
+    return "Anonymous";
+  }
 
-    @Before("inController()")
-    public void writeBeforeLog(JoinPoint jp) {
-        this.debugInController(jp, "Start");
-    }
+  @Pointcut("within(com.github.binarywang.demo.spring..*.controller..*)")
+  public void inController() {
+  }
 
-    @After("inController()")
-    public void writeAfterLog(JoinPoint jp) {
-        this.debugInController(jp, "End");
-    }
+  @Pointcut("execution(public * com.github.binarywang.demo.spring..*.controller..*.*(..))")
+  public void controller() {
+  }
 
-    private void debugInController(JoinPoint jp, String msg) {
-        String userName = getLoginUserName();
+  @Before("inController()")
+  public void writeBeforeLog(JoinPoint jp) {
+    this.debugInController(jp, "Start");
+  }
 
-        this.logger.debug("\n【{}】{}.{}() {} ", userName,
-            jp.getTarget()
+  @After("inController()")
+  public void writeAfterLog(JoinPoint jp) {
+    this.debugInController(jp, "End");
+  }
+
+  private void debugInController(JoinPoint jp, String msg) {
+    String userName = getLoginUserName();
+
+    this.logger.debug("\n【{}】{}.{}() {} ", userName,
+        jp.getTarget()
             .getClass().getSimpleName(), jp.getSignature().getName(), msg);
+  }
+
+  @Before("controller()")
+  public void writeParams(JoinPoint jp) {
+    String[] names = ((CodeSignature) jp.getSignature())
+        .getParameterNames();
+    Object[] args = jp.getArgs();
+
+    if (ArrayUtils.isEmpty(names)) {
+      return;
     }
 
-    private static String getLoginUserName() {
-        Authentication authentication = SecurityContextHolder.getContext()
-            .getAuthentication();
-        if (authentication != null) {
-            return authentication.getName();
-        }
-
-        return "Anonymous";
+    StringBuilder sb = new StringBuilder("Arguments: ");
+    for (int i = 0; i < names.length; i++) {
+      sb.append(names[i] + " = " + args[i] + ",");
     }
 
-    @Before("controller()")
-    public void writeParams(JoinPoint jp) {
-        String[] names = ((CodeSignature) jp.getSignature())
-            .getParameterNames();
-        Object[] args = jp.getArgs();
-
-        if (ArrayUtils.isEmpty(names)) {
-            return;
-        }
-
-        StringBuilder sb = new StringBuilder("Arguments: ");
-        for (int i = 0; i < names.length; i++) {
-            sb.append(names[i] + " = " + args[i] + ",");
-        }
-
-        debugInController(jp, sb.toString());
-    }
+    debugInController(jp, sb.toString());
+  }
 
 }
