@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/binarywang/weixin-java-mp-multi-demo.svg?branch=master)](https://travis-ci.org/binarywang/weixin-java-mp-multi-demo)
-### 本项目为weixin-java-tools的Demo演示程序，更多Demo请查阅：https://github.com/Wechat-Group/weixin-java-tools
+### 本项目为WxJava的Demo演示程序，更多Demo请查阅：https://github.com/Wechat-Group/WxJava
 
 #### 本Demo使用Spring MVC 框架实现微信公众号开发功能，支持多公众号，欢迎帮忙维护添加新功能，或提供更好的实现。
 1. 如果想使用更多公众号，请复制相关配置文件，修改spring配置文件添加相应配置，同时还需要增加相应的controller和service，具体可以参考已有源码进行操作。
