@@ -2,12 +2,12 @@ package com.github.binarywang.demo.wx.mp.service;
 
 import com.github.binarywang.demo.wx.mp.config.WxConfig;
 import com.github.binarywang.demo.wx.mp.handler.*;
-import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpMessageRouter;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.kefu.result.WxMpKfOnlineList;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlOutMessage;
+import me.chanjar.weixin.mp.config.impl.WxMpDefaultConfigImpl;
 import me.chanjar.weixin.mp.constant.WxMpEventConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +53,7 @@ public abstract class BaseWxService extends WxMpServiceImpl {
 
   @PostConstruct
   public void init() {
-    final WxMpInMemoryConfigStorage config = new WxMpInMemoryConfigStorage();
+    final WxMpDefaultConfigImpl config = new WxMpDefaultConfigImpl();
     config.setAppId(this.getServerConfig().getAppid());// 设置微信公众号的appid
     config.setSecret(this.getServerConfig().getAppsecret());// 设置微信公众号的app corpSecret
     config.setToken(this.getServerConfig().getToken());// 设置微信公众号的token
@@ -72,50 +72,50 @@ public abstract class BaseWxService extends WxMpServiceImpl {
 
     // 接收客服会话管理事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(WxMpEventConstants.CustomerService.KF_CLOSE_SESSION)
-        .handler(this.kfSessionHandler).end();
+      .event(WxMpEventConstants.CustomerService.KF_CLOSE_SESSION)
+      .handler(this.kfSessionHandler).end();
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(WxMpEventConstants.CustomerService.KF_CREATE_SESSION)
-        .handler(this.kfSessionHandler).end();
+      .event(WxMpEventConstants.CustomerService.KF_CREATE_SESSION)
+      .handler(this.kfSessionHandler).end();
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(WxMpEventConstants.CustomerService.KF_SWITCH_SESSION)
-        .handler(this.kfSessionHandler).end();
+      .event(WxMpEventConstants.CustomerService.KF_SWITCH_SESSION)
+      .handler(this.kfSessionHandler).end();
 
     // 门店审核事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(WxMpEventConstants.POI_CHECK_NOTIFY)
-        .handler(this.storeCheckNotifyHandler)
-        .end();
+      .event(WxMpEventConstants.POI_CHECK_NOTIFY)
+      .handler(this.storeCheckNotifyHandler)
+      .end();
 
     // 自定义菜单事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(MenuButtonType.CLICK).handler(this.getMenuHandler()).end();
+      .event(MenuButtonType.CLICK).handler(this.getMenuHandler()).end();
 
     // 点击菜单连接事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(MenuButtonType.VIEW).handler(this.nullHandler).end();
+      .event(MenuButtonType.VIEW).handler(this.nullHandler).end();
 
     // 关注事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(EventType.SUBSCRIBE).handler(this.getSubscribeHandler())
-        .end();
+      .event(EventType.SUBSCRIBE).handler(this.getSubscribeHandler())
+      .end();
 
     // 取消关注事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(EventType.UNSUBSCRIBE).handler(this.getUnsubscribeHandler())
-        .end();
+      .event(EventType.UNSUBSCRIBE).handler(this.getUnsubscribeHandler())
+      .end();
 
     // 上报地理位置事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(EventType.LOCATION).handler(this.getLocationHandler()).end();
+      .event(EventType.LOCATION).handler(this.getLocationHandler()).end();
 
     // 接收地理位置消息
     newRouter.rule().async(false).msgType(XmlMsgType.LOCATION)
-        .handler(this.getLocationHandler()).end();
+      .handler(this.getLocationHandler()).end();
 
     // 扫码事件
     newRouter.rule().async(false).msgType(XmlMsgType.EVENT)
-        .event(EventType.SCAN).handler(this.getScanHandler()).end();
+      .event(EventType.SCAN).handler(this.getScanHandler()).end();
 
     // 默认
     newRouter.rule().async(false).handler(this.getMsgHandler()).end();
