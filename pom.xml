@@ -15,13 +15,11 @@
 	    <maven.compiler.target>1.8</maven.compiler.target>
 
 		<weixin-java-mp.version>3.9.0</weixin-java-mp.version>
-		<spring.version>4.3.2.RELEASE</spring.version>
-		<spring-security.version>4.2.17.RELEASE</spring-security.version>
-		<guava.version>24.1.1-jre</guava.version>
+		<spring.version>5.2.8.RELEASE</spring.version>
+		<spring-security.version>5.4.0</spring-security.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<aspectj.version>1.8.9</aspectj.version>
 		<fastjson.version>1.2.31</fastjson.version>
-		<commons-lang3.version>3.4</commons-lang3.version>
 		<jackson.version>2.10.0.pr1</jackson.version>
 		<jetty-maven-plugin.version>9.3.10.v20160621</jetty-maven-plugin.version>
 	</properties>
@@ -37,21 +35,6 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang3.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
