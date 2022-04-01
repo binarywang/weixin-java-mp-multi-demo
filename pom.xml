@@ -20,7 +20,7 @@
 		<slf4j.version>1.7.2</slf4j.version>
 		<aspectj.version>1.8.9</aspectj.version>
 		<fastjson.version>1.2.31</fastjson.version>
-		<jackson.version>2.10.0.pr1</jackson.version>
+		<jackson.version>2.12.6.1</jackson.version>
 		<jetty-maven-plugin.version>9.3.10.v20160621</jetty-maven-plugin.version>
 	</properties>
 
