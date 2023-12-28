@@ -58,7 +58,7 @@ public abstract class MenuHandler extends AbstractHandler {
       try {
         return builder.build(menuKey.getContent(), wxMessage, weixinService);
       } catch (Exception e) {
-        this.logger.error(e.getMessage(), e);
+        log.error(e.getMessage(), e);
       }
     }
 

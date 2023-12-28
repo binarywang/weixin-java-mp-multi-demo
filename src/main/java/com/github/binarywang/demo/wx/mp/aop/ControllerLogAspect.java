@@ -52,7 +52,7 @@ public class ControllerLogAspect {
   private void debugInController(JoinPoint jp, String msg) {
     String userName = getLoginUserName();
 
-    this.logger.debug("\n【{}】{}.{}() {} ", userName,
+    log.debug("\n【{}】{}.{}() {} ", userName,
         jp.getTarget()
             .getClass().getSimpleName(), jp.getSignature().getName(), msg);
   }
